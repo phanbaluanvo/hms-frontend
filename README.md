@@ -1,6 +1,10 @@
-# Hospital Management System (HMS)
+# HMS — Health Management System (Frontend)
 
 A full-stack web application for managing hospital operations, built with React and Spring Boot. The system supports four distinct user roles — Admin, Doctor, Staff, and Patient — each with their own portal and permissions.
+
+> Backend repo: https://github.com/phanbaluanvo/hms-backend.git
+
+---
 
 ## Features
 
