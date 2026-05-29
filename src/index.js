@@ -5,8 +5,6 @@ import './index.css'; // Import global styles
 // import StaffApp from './StaffApp'; // Main file for the staff module
 // import PatientApp from './PatientApp'; // Main file for the patient module
 import reportWebVitals from './reportWebVitals'
-import { Provider } from 'react-redux';
-
 import App from './App';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));

@@ -39,7 +39,7 @@ A full-stack web application for managing hospital operations, built with React 
 **Frontend**
 - [React 18](https://react.dev/)
 - [React Router v6](https://reactrouter.com/)
-- [React Redux](https://react-redux.js.org/)
+- [React Context API](https://react.dev/reference/react/useContext) for global state management
 - [Axios](https://axios-http.com/) with JWT request/response interceptors
 - [Tailwind CSS](https://tailwindcss.com/)
 - [Font Awesome](https://fontawesome.com/)
