@@ -1,70 +1,134 @@
-# Getting Started with Create React App
+# Hospital Management System (HMS)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A full-stack web application for managing hospital operations, built with React and Spring Boot. The system supports four distinct user roles — Admin, Doctor, Staff, and Patient — each with their own portal and permissions.
 
-## Available Scripts
+## Features
 
-In the project directory, you can run:
+### Admin
+- Dashboard overview
+- Employee management: create, view, update, and deactivate employee accounts (Doctor / Staff)
+- Patient management: search and view patient records
+- Exam management: browse, view details, and delete medical exams
+- Generate reports
 
-### `npm start`
+### Doctor
+- View assigned exam list with advanced filters (patient, date range, exam type, abnormal flag)
+- Prescribe new exams for patients
+- View detailed exam results and update exam items
+- Set up patient monitoring items
+- Account settings with profile photo upload
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### Staff
+- View and search all exams across the hospital
+- View detailed exam records
+- Account settings
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### Patient
+- Self-registration and login
+- View personal exam history with filters
+- View detailed exam results
+- Account settings
 
-### `npm test`
+### All roles
+- JWT authentication with automatic silent token refresh
+- Role-based access control enforced on both frontend and backend
+- Profile photo upload
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Tech Stack
 
-### `npm run build`
+**Frontend**
+- [React 18](https://react.dev/)
+- [React Router v6](https://reactrouter.com/)
+- [React Redux](https://react-redux.js.org/)
+- [Axios](https://axios-http.com/) with JWT request/response interceptors
+- [Tailwind CSS](https://tailwindcss.com/)
+- [Font Awesome](https://fontawesome.com/)
+- [Day.js](https://day.js.org/)
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+**Backend**
+- Java Spring Boot
+- Spring Security with JWT
+- Role-based authorization via `@PreAuthorize`
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Getting Started
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Prerequisites
+- Node.js 18+
+- Java 17+
+- Spring Boot backend running (default port `8081`)
 
-### `npm run eject`
+### Installation
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+```bash
+# Clone the repository
+git clone <your-repo-url>
+cd HMS-frontend-reactjs/hms-frontend-reactjs
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+# Install dependencies
+npm install
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+# Start the development server
+npm start
+```
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+The app will open at [http://localhost:3000](http://localhost:3000).
 
-## Learn More
+### Environment Variables
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Create a `.env` file in the project root to point to your backend:
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+```env
+REACT_APP_API_URL=http://localhost:8081
+```
 
-### Code Splitting
+If not set, the app defaults to `http://localhost:8081`.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+## Project Structure
 
-### Analyzing the Bundle Size
+```
+src/
+├── config/
+│   └── axios-customize.js      # Axios instance with JWT interceptors
+├── modules/
+│   ├── Admin/                  # Admin portal
+│   │   ├── components/         # Reusable UI components
+│   │   └── pages/              # Dashboard, employees, patients, exams, reports
+│   ├── client/                 # Doctor, Staff, Patient portals
+│   │   ├── components/         # Shared modals and UI components
+│   │   └── page/               # Role-specific pages
+│   └── Login/                  # Welcome page and employee login
+├── services/                   # API service layer
+│   ├── AccountService.js
+│   ├── EmployeeService.js
+│   ├── ExamService.js
+│   ├── MonitoringItemService.js
+│   └── PatientService.js
+└── utils/
+    ├── AuthService.js          # Login, logout, token handling
+    └── UserContext.js          # Global authenticated user state
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+## Routes
 
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+| Path | Access | Description |
+|------|--------|-------------|
+| `/welcome` | Public | Landing page |
+| `/employee/login` | Public | Employee login |
+| `/patient/login` | Public | Patient login |
+| `/patient/register` | Public | Patient self-registration |
+| `/admin/dashboard` | Admin | Dashboard |
+| `/admin/employee/manage` | Admin | Employee list |
+| `/admin/employee/create` | Admin | Create new employee |
+| `/admin/employee/view/:workingId` | Admin | Employee detail |
+| `/admin/patient/manage` | Admin | Patient list |
+| `/admin/patient/view/:patientId` | Admin | Patient detail |
+| `/admin/exam/manage` | Admin | Exam list |
+| `/admin/exam/view/:examId` | Admin | Exam detail |
+| `/admin/report` | Admin | Generate reports |
+| `/doctor` | Doctor | Exam list + prescribe |
+| `/doctor/exam/view/:examId` | Doctor | Exam detail |
+| `/staff` | Staff | Exam list |
+| `/staff/exam/view/:examId` | Staff | Exam detail |
+| `/patient` | Patient | Personal exam history |
+| `/patient/exam/view/:examId` | Patient | Exam detail |
+| `/:role/account-setting` | All | Account settings |
